@@ -1,8 +1,5 @@
 package com.example.tugaspertemuan04_aliafellanitamiachyar.ui.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -11,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -43,7 +41,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Switch
@@ -53,15 +50,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkBackground
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkBorder
+import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkContainer
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkSurface
-import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkSurfaceVariant
-import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.ErrorContainer
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.ErrorRed
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.InfoBlue
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.MutedOlive
@@ -81,24 +76,25 @@ fun StatelessHeader(
     subtitle: String,
     modifier: Modifier = Modifier
 ) {
-    OutlinedCard(
+    Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = DarkSurface),
-        border = CardDefaults.outlinedCardBorder().copy(brush = androidx.compose.ui.graphics.SolidColor(DarkBorder))
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = DarkSurface),
+        border = androidx.compose.foundation.BorderStroke(1.dp, DarkBorder)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 14.dp),
+                .padding(horizontal = 14.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
+            Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = appName,
-                    style = MaterialTheme.typography.titleLarge,
-                    color = TextPrimary
+                    style = MaterialTheme.typography.titleMedium,
+                    color = TextPrimary,
+                    fontWeight = FontWeight.Bold
                 )
                 Text(
                     text = subtitle,
@@ -108,7 +104,7 @@ fun StatelessHeader(
             }
             Box(
                 modifier = Modifier
-                    .size(44.dp)
+                    .size(38.dp)
                     .clip(CircleShape)
                     .background(OliveContainer)
                     .border(1.dp, MutedOlive, CircleShape),
@@ -118,7 +114,7 @@ fun StatelessHeader(
                     imageVector = Icons.Default.Person,
                     contentDescription = "Avatar Profil",
                     tint = MutedOlive,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(20.dp)
                 )
             }
         }
@@ -146,25 +142,26 @@ fun StatelessInputField(
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
-            label = { Text(text = label) },
-            placeholder = { Text(text = placeholder, color = TextMuted) },
+            label = { Text(text = label, style = MaterialTheme.typography.bodyMedium) },
+            placeholder = { Text(text = placeholder, color = TextMuted, style = MaterialTheme.typography.bodyMedium) },
             leadingIcon = {
                 Icon(
                     imageVector = leadingIcon,
                     contentDescription = label,
-                    tint = if (isError) ErrorRed else MutedOlive
+                    tint = if (isError) ErrorRed else MutedOlive,
+                    modifier = Modifier.size(20.dp)
                 )
             },
             isError = isError,
             singleLine = singleLine,
             maxLines = maxLines,
-            shape = RoundedCornerShape(12.dp),
+            shape = RoundedCornerShape(10.dp),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedTextColor = TextPrimary,
                 unfocusedTextColor = TextPrimary,
-                focusedContainerColor = DarkSurface,
-                unfocusedContainerColor = DarkSurface,
-                errorContainerColor = DarkSurface,
+                focusedContainerColor = DarkBackground,
+                unfocusedContainerColor = DarkBackground,
+                errorContainerColor = DarkBackground,
                 focusedBorderColor = MutedOlive,
                 unfocusedBorderColor = DarkBorder,
                 errorBorderColor = ErrorRed,
@@ -178,14 +175,14 @@ fun StatelessInputField(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 12.dp, top = 4.dp),
+                    .padding(start = 8.dp, top = 2.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     imageVector = Icons.Default.Warning,
                     contentDescription = "Error",
                     tint = ErrorRed,
-                    modifier = Modifier.size(14.dp)
+                    modifier = Modifier.size(13.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
@@ -211,93 +208,103 @@ fun SemesterStepper(
     maxSemester: Int = 8,
     modifier: Modifier = Modifier
 ) {
-    OutlinedCard(
+    Row(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = DarkSurface),
-        border = CardDefaults.outlinedCardBorder().copy(brush = androidx.compose.ui.graphics.SolidColor(DarkBorder))
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            modifier = Modifier.weight(1f, fill = false)
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(
-                    modifier = Modifier
-                        .size(36.dp)
-                        .clip(CircleShape)
-                        .background(DarkSurfaceVariant),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.School,
-                        contentDescription = "Semester",
-                        tint = InfoBlue,
-                        modifier = Modifier.size(20.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.width(12.dp))
-                Column {
-                    Text(
-                        text = "Semester Berjalan",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = TextPrimary
-                    )
-                    Text(
-                        text = "Rentang: $minSemester - $maxSemester",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = TextSecondary
-                    )
-                }
+            Box(
+                modifier = Modifier
+                    .size(30.dp)
+                    .clip(CircleShape)
+                    .background(DarkContainer),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.School,
+                    contentDescription = "Semester",
+                    tint = InfoBlue,
+                    modifier = Modifier.size(16.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(8.dp))
+            Column {
+                Text(
+                    text = "Semester Berjalan",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextPrimary,
+                    fontWeight = FontWeight.SemiBold,
+                    maxLines = 1
+                )
+                Text(
+                    text = "Rentang: $minSemester–$maxSemester",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = TextSecondary,
+                    maxLines = 1
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            FilledTonalIconButton(
+                onClick = onDecrement,
+                enabled = semester > minSemester,
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = DarkContainer,
+                    contentColor = TextPrimary,
+                    disabledContainerColor = DarkContainer.copy(alpha = 0.4f),
+                    disabledContentColor = TextSecondary.copy(alpha = 0.4f)
+                ),
+                modifier = Modifier.size(32.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Remove,
+                    contentDescription = "Kurang",
+                    modifier = Modifier.size(16.dp)
+                )
             }
 
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                FilledTonalIconButton(
-                    onClick = onDecrement,
-                    enabled = semester > minSemester,
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = DarkSurfaceVariant,
-                        contentColor = TextPrimary,
-                        disabledContainerColor = DarkSurfaceVariant.copy(alpha = 0.4f),
-                        disabledContentColor = TextSecondary.copy(alpha = 0.4f)
-                    ),
-                    modifier = Modifier.size(36.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Remove, contentDescription = "Kurang")
-                }
+            Box(
+                modifier = Modifier
+                    .clip(RoundedCornerShape(6.dp))
+                    .background(OliveContainer)
+                    .padding(horizontal = 10.dp, vertical = 5.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Semester $semester",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = TextPrimary,
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1
+                )
+            }
 
-                Box(
-                    modifier = Modifier
-                        .padding(horizontal = 12.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(OliveContainer)
-                        .padding(horizontal = 14.dp, vertical = 6.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Semester $semester",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = TextPrimary,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-
-                FilledTonalIconButton(
-                    onClick = onIncrement,
-                    enabled = semester < maxSemester,
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = DarkSurfaceVariant,
-                        contentColor = TextPrimary,
-                        disabledContainerColor = DarkSurfaceVariant.copy(alpha = 0.4f),
-                        disabledContentColor = TextSecondary.copy(alpha = 0.4f)
-                    ),
-                    modifier = Modifier.size(36.dp)
-                ) {
-                    Icon(imageVector = Icons.Default.Add, contentDescription = "Tambah")
-                }
+            FilledTonalIconButton(
+                onClick = onIncrement,
+                enabled = semester < maxSemester,
+                colors = IconButtonDefaults.filledTonalIconButtonColors(
+                    containerColor = DarkContainer,
+                    contentColor = TextPrimary,
+                    disabledContainerColor = DarkContainer.copy(alpha = 0.4f),
+                    disabledContentColor = TextSecondary.copy(alpha = 0.4f)
+                ),
+                modifier = Modifier.size(32.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Tambah",
+                    modifier = Modifier.size(16.dp)
+                )
             }
         }
     }
@@ -318,19 +325,20 @@ fun PeminatanSelectionGroup(
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             text = "Peminatan / Jalur Keahlian",
-            style = MaterialTheme.typography.titleMedium,
-            color = TextPrimary
+            style = MaterialTheme.typography.bodyLarge,
+            color = TextPrimary,
+            fontWeight = FontWeight.Medium
         )
         Text(
-            text = "Pilih salah satu konsentrasi peminatan studi Anda:",
-            style = MaterialTheme.typography.bodyMedium,
+            text = "Pilih konsentrasi studi Anda:",
+            style = MaterialTheme.typography.labelMedium,
             color = TextSecondary
         )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(6.dp))
         FlowRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             options.forEach { option ->
                 val isSelected = option == selectedPeminatan
@@ -340,7 +348,7 @@ fun PeminatanSelectionGroup(
                     label = {
                         Text(
                             text = option,
-                            style = MaterialTheme.typography.labelLarge,
+                            style = MaterialTheme.typography.bodyMedium,
                             color = if (isSelected) TextPrimary else TextSecondary
                         )
                     },
@@ -350,13 +358,13 @@ fun PeminatanSelectionGroup(
                                 imageVector = Icons.Default.Check,
                                 contentDescription = "Terpilih",
                                 tint = MutedOlive,
-                                modifier = Modifier.size(16.dp)
+                                modifier = Modifier.size(14.dp)
                             )
                         }
                     } else null,
-                    shape = RoundedCornerShape(10.dp),
+                    shape = RoundedCornerShape(8.dp),
                     colors = FilterChipDefaults.filterChipColors(
-                        containerColor = DarkSurface,
+                        containerColor = DarkBackground,
                         selectedContainerColor = OliveContainer,
                         selectedLabelColor = TextPrimary
                     ),
@@ -380,42 +388,34 @@ fun ActiveStatusSwitch(
     onActiveChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    OutlinedCard(
+    Row(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.outlinedCardColors(containerColor = DarkSurface),
-        border = CardDefaults.outlinedCardBorder().copy(brush = androidx.compose.ui.graphics.SolidColor(DarkBorder))
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = "Status Keaktifan Kuliah",
-                    style = MaterialTheme.typography.titleMedium,
-                    color = TextPrimary
-                )
-                Text(
-                    text = if (isActive) "Status: Mahasiswa Aktif" else "Status: Non-Aktif / Cuti",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = if (isActive) SuccessGreen else TextSecondary
-                )
-            }
-            Switch(
-                checked = isActive,
-                onCheckedChange = onActiveChange,
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = TextPrimary,
-                    checkedTrackColor = MutedOlive,
-                    uncheckedThumbColor = TextSecondary,
-                    uncheckedTrackColor = DarkSurfaceVariant
-                )
+        Column(modifier = Modifier.weight(1f)) {
+            Text(
+                text = "Status Keaktifan Kuliah",
+                style = MaterialTheme.typography.bodyLarge,
+                color = TextPrimary,
+                fontWeight = FontWeight.Medium
+            )
+            Text(
+                text = if (isActive) "Mahasiswa Aktif" else "Non-Aktif / Cuti",
+                style = MaterialTheme.typography.labelMedium,
+                color = if (isActive) SuccessGreen else TextSecondary
             )
         }
+        Switch(
+            checked = isActive,
+            onCheckedChange = onActiveChange,
+            colors = SwitchDefaults.colors(
+                checkedThumbColor = TextPrimary,
+                checkedTrackColor = MutedOlive,
+                uncheckedThumbColor = TextSecondary,
+                uncheckedTrackColor = DarkContainer
+            )
+        )
     }
 }
 
@@ -428,39 +428,28 @@ fun AgreementCheckbox(
     onAgreedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    OutlinedCard(
-        modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(14.dp),
-        colors = CardDefaults.outlinedCardColors(
-            containerColor = if (isAgreed) OliveContainer.copy(alpha = 0.3f) else DarkSurface
-        ),
-        border = CardDefaults.outlinedCardBorder().copy(
-            brush = androidx.compose.ui.graphics.SolidColor(if (isAgreed) MutedOlive else DarkBorder)
-        )
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { onAgreedChange(!isAgreed) }
+            .padding(vertical = 2.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .clickable { onAgreedChange(!isAgreed) }
-                .padding(horizontal = 12.dp, vertical = 10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Checkbox(
-                checked = isAgreed,
-                onCheckedChange = onAgreedChange,
-                colors = CheckboxDefaults.colors(
-                    checkedColor = MutedOlive,
-                    uncheckedColor = TextSecondary,
-                    checkmarkColor = DarkBackground
-                )
+        Checkbox(
+            checked = isAgreed,
+            onCheckedChange = onAgreedChange,
+            colors = CheckboxDefaults.colors(
+                checkedColor = MutedOlive,
+                uncheckedColor = TextSecondary,
+                checkmarkColor = DarkBackground
             )
-            Spacer(modifier = Modifier.width(8.dp))
-            Text(
-                text = "Saya menyatakan seluruh informasi biodata yang saya isi adalah benar, akurat, dan dapat dipertanggungjawabkan.",
-                style = MaterialTheme.typography.bodyMedium,
-                color = if (isAgreed) TextPrimary else TextSecondary
-            )
-        }
+        )
+        Text(
+            text = "Saya menyatakan seluruh informasi biodata yang saya isi adalah benar dan akurat.",
+            style = MaterialTheme.typography.bodyMedium,
+            color = if (isAgreed) TextPrimary else TextSecondary,
+            modifier = Modifier.weight(1f)
+        )
     }
 }
 
@@ -476,13 +465,16 @@ fun FormActionButtons(
 ) {
     Row(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         OutlinedButton(
             onClick = onReset,
-            modifier = Modifier.weight(1f),
-            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier
+                .weight(1f)
+                .height(44.dp),
+            contentPadding = PaddingValues(horizontal = 8.dp),
+            shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.outlinedButtonColors(
                 contentColor = TextSecondary
             ),
@@ -491,33 +483,43 @@ fun FormActionButtons(
             Icon(
                 imageVector = Icons.Default.Refresh,
                 contentDescription = "Reset",
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(16.dp)
             )
-            Spacer(modifier = Modifier.width(6.dp))
-            Text(text = "Reset", fontWeight = FontWeight.Medium)
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(
+                text = "Reset",
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.Medium,
+                maxLines = 1
+            )
         }
 
         Button(
             onClick = onSave,
             enabled = isFormValid,
-            modifier = Modifier.weight(1.5f),
-            shape = RoundedCornerShape(12.dp),
+            modifier = Modifier
+                .weight(1.4f)
+                .height(44.dp),
+            contentPadding = PaddingValues(horizontal = 8.dp),
+            shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MutedOlive,
                 contentColor = TextPrimary,
-                disabledContainerColor = DarkSurfaceVariant,
+                disabledContainerColor = DarkContainer,
                 disabledContentColor = TextMuted
             )
         ) {
             Icon(
                 imageVector = Icons.Default.Save,
                 contentDescription = "Simpan",
-                modifier = Modifier.size(18.dp)
+                modifier = Modifier.size(16.dp)
             )
-            Spacer(modifier = Modifier.width(6.dp))
+            Spacer(modifier = Modifier.width(4.dp))
             Text(
                 text = if (isFormValid) "Simpan Biodata" else "Form Belum Valid",
-                fontWeight = FontWeight.SemiBold
+                style = MaterialTheme.typography.labelLarge,
+                fontWeight = FontWeight.SemiBold,
+                maxLines = 1
             )
         }
     }
@@ -540,15 +542,15 @@ fun ProfileFeedbackCard(
 ) {
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = SuccessContainer.copy(alpha = 0.5f)),
+        shape = RoundedCornerShape(12.dp),
+        colors = CardDefaults.cardColors(containerColor = SuccessContainer.copy(alpha = 0.4f)),
         border = androidx.compose.foundation.BorderStroke(1.dp, SuccessGreen)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp)
+                .padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -558,11 +560,11 @@ fun ProfileFeedbackCard(
                     imageVector = Icons.Default.CheckCircle,
                     contentDescription = "Sukses",
                     tint = SuccessGreen,
-                    modifier = Modifier.size(24.dp)
+                    modifier = Modifier.size(20.dp)
                 )
                 Text(
                     text = "Profil Berhasil Disimpan!",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     color = SuccessGreen,
                     fontWeight = FontWeight.Bold
                 )

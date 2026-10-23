@@ -5,11 +5,12 @@ import androidx.compose.ui.graphics.Color
 // Dark Slate & Muted Olive Palette (Material 3 Dark Theme)
 val DarkBackground = Color(0xFF171A20)      // Background Utama (#171A20)
 val DarkSurface = Color(0xFF222731)         // Card / Surface (#222731)
-val DarkSurfaceVariant = Color(0xFF2B3039)  // Surface Sekunder / Container (#2B3039)
-val DarkBorder = Color(0xFF343A44)          // Border Outline (#343A44)
+val DarkContainer = Color(0xFF2B3039)       // Chip & Surface Sekunder / Container (#2B3039)
+val DarkSurfaceVariant = DarkContainer      // Alias untuk kompatibilitas
+val DarkBorder = Color(0xFF343A44)          // Border Outline & Divider (#343A44)
 
 // Text Colors
-val TextPrimary = Color(0xFFF3F4F6)         // Teks Utama (#F3F4F6)
+val TextPrimary = Color(0xFFE5E7EB)         // Teks Utama (#E5E7EB)
 val TextSecondary = Color(0xFF9CA3AF)       // Teks Sekunder (#9CA3AF)
 val TextMuted = Color(0xFF6B7280)           // Teks Placeholder / Hint (#6B7280)
 

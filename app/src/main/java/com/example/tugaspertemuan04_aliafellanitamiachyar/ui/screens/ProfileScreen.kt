@@ -4,9 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -54,7 +52,6 @@ import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.components.Stateles
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkBackground
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkBorder
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.DarkSurface
-import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.ErrorRed
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.InfoBlue
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.SuccessGreen
 import com.example.tugaspertemuan04_aliafellanitamiachyar.ui.theme.TextMuted
@@ -130,8 +127,8 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState())
-                .padding(horizontal = 16.dp, vertical = 20.dp),
-            verticalArrangement = Arrangement.spacedBy(18.dp)
+                .padding(horizontal = 16.dp, vertical = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             // Header Bar
             StatelessHeader(
@@ -192,7 +189,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                     placeholder = "Catatan singkat minat atau tujuan akademik...",
                     leadingIcon = Icons.Default.Description,
                     singleLine = false,
-                    maxLines = 3
+                    maxLines = 2
                 )
             }
 
@@ -214,8 +211,6 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                     }
                 )
 
-                Spacer(modifier = Modifier.height(4.dp))
-
                 PeminatanSelectionGroup(
                     selectedPeminatan = selectedPeminatan,
                     options = peminatanOptions,
@@ -235,8 +230,6 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                         isSubmitted = false
                     }
                 )
-
-                Spacer(modifier = Modifier.height(2.dp))
 
                 AgreementCheckbox(
                     isAgreed = isAgreed,
@@ -301,7 +294,7 @@ fun ProfileScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(28.dp))
         }
     }
 }
@@ -316,21 +309,21 @@ private fun SectionCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = DarkSurface),
         border = androidx.compose.foundation.BorderStroke(1.dp, DarkBorder)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+                .padding(14.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = TextPrimary,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.SemiBold
             )
             content()
         }
@@ -349,22 +342,22 @@ private fun ValidationChecklistCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(containerColor = DarkSurface.copy(alpha = 0.6f)),
         border = androidx.compose.foundation.BorderStroke(1.dp, DarkBorder)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+                .padding(10.dp),
+            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     imageVector = Icons.Default.Info,
                     contentDescription = "Panduan",
                     tint = InfoBlue,
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(15.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
@@ -393,7 +386,7 @@ private fun ValidationItem(label: String, isValid: Boolean) {
             imageVector = if (isValid) Icons.Default.Check else Icons.Default.Close,
             contentDescription = null,
             tint = if (isValid) SuccessGreen else TextMuted,
-            modifier = Modifier.size(14.dp)
+            modifier = Modifier.size(13.dp)
         )
         Text(
             text = label,
