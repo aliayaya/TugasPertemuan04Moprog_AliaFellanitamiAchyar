@@ -10,7 +10,7 @@
 - **NIM:** 0102523010
 - **Digit Terakhir NIM:** `0`
 - **Tema Aplikasi:** **Profil Mahasiswa / Biodata Interaktif** (Sesuai ketentuan rentang digit 0–1)
-- **Repository Git:** [https://github.com/aliayaya/TugasPertemuan04_AliaFellanitamiAchyar](https://github.com/aliayaya/TugasPertemuan04_AliaFellanitamiAchyar)
+- **Repository Git:** [https://github.com/aliayaya/TugasPertemuan04_AliaFellanitamiAchyar](https://github.com/aliayaya/TugasPertemuan04Moprog_AliaFellanitamiAchyar)
 
 ---
 
